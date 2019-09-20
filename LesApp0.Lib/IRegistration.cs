@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LesApp0
+// дозвіл доступу для тестування
+[assembly: InternalsVisibleTo("LesApp0.Tests")]
+
+namespace LesApp0.Lib
 {
     /// <summary>
     /// Реєстрація за певними даними
@@ -16,6 +20,7 @@ namespace LesApp0
         /// </summary>
         /// <param name="data">Вхідні дані: логін/пароль...</param>
         /// <returns></returns>
-        bool TryRegister(string data);
+        bool TryRegister(string data, out string result);
+
     }
 }
