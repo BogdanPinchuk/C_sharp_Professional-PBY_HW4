@@ -21,7 +21,7 @@ namespace LesApp0.Tests.Stub
         /// Цифра
         /// </summary>
         public static string LoginFalse0
-            => "Login0";
+            => "Login5";
         /// <summary>
         /// Не латинський алфавіт
         /// </summary>

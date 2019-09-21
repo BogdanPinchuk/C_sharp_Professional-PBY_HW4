@@ -9,7 +9,7 @@ namespace LesApp0.Lib
     internal class Login : IRegistration
     {
         // шаблон перевірки
-        private readonly string pattern = @"[A-Za-z]";
+        private readonly string pattern = @"^[A-Za-z]+$";
 
         /// <summary>
         /// Перевірка логіна
@@ -26,7 +26,8 @@ namespace LesApp0.Lib
             result = data.Trim(' ');
 
             // перевірка відповідності шаблону
-            return regex.IsMatch(result);
+            var res =  regex.IsMatch(result);
+            return res;
         }
 
     }
