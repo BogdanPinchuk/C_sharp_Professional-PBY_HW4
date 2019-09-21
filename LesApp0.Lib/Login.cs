@@ -19,6 +19,12 @@ namespace LesApp0.Lib
         /// <returns></returns>
         public bool TryRegister(string data, out string result)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                result = string.Empty;
+                return false;
+            }
+
             // екземпляр класа RegEx
             var regex = new Regex(pattern);
 

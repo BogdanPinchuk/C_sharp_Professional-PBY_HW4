@@ -58,6 +58,14 @@ namespace LesApp0.Tests
         public void Login_Space_FalseReturn()
             => Login_Test(StubObjects.LoginFalse3, false);
 
+        [TestMethod]
+        public void Login_NullAble_FalseReturn()
+            => Login_Test(StubObjects.LoginFalse4, false);
+
+        [TestMethod]
+        public void Login_AddSign_FalseReturn()
+            => Login_Test(StubObjects.LoginFalse5, false);
+
         /// <summary>
         /// Тестування логінів
         /// </summary>
