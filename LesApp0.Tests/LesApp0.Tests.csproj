@@ -50,9 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CheckPasswordTest.cs" />
     <Compile Include="CheckLoginTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stub\StubObjects.cs" />
+    <Compile Include="TestMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LesApp0\LesApp0.csproj">

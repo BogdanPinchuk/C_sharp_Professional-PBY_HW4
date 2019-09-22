@@ -49,5 +49,43 @@ namespace LesApp0.Tests.Stub
             => "Login#";
         #endregion
 
+        #region Password
+        /// <summary>
+        /// Правильний ввід
+        /// </summary>
+        public static string PasswordTrue
+            => "Password";
+        /// <summary>
+        /// Цифра
+        /// </summary>
+        public static string PasswordFalse0
+            => "Password27";
+        /// <summary>
+        /// Не латинський алфавіт
+        /// </summary>
+        public static string PasswordFalse1
+            => "Логін";
+        /// <summary>
+        /// Пустий рядок
+        /// </summary>
+        public static string PasswordFalse2
+            => string.Empty;
+        /// <summary>
+        /// Пробіл
+        /// </summary>
+        public static string PasswordFalse3
+            => " ";
+        /// <summary>
+        /// Nullable
+        /// </summary>
+        public static string PasswordFalse4
+            => null;
+        /// <summary>
+        /// Недопустимі знаки
+        /// </summary>
+        public static string PasswordFalse5
+            => "Password#";
+        #endregion
+
     }
 }

@@ -1,21 +1,19 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
-namespace LesApp0.Lib
+namespace LesApp0
 {
     /// <summary>
-    /// Логін
+    /// Пароль
     /// </summary>
-    internal class Login : IRegistration
+    internal class Password : IRegistration
     {
-        // шаблон перевірки
-        private readonly string pattern = @"^[A-Za-z]+$";
+        // шаблон перевірки (\w - не підходть так як нічого не скахано про символ підкреслення в умові)
+        private readonly string pattern = @"^[A-Za-z0-9]+$";
 
         /// <summary>
-        /// Перевірка логіна
+        /// Перевірка пароля
         /// </summary>
         /// <param name="data">вхідні дані</param>
-        /// <param name="result">Повернення логіна (+обрізка пробілів)</param>
         /// <returns></returns>
         public bool TryRegister(string data, out string result)
         {
@@ -32,9 +30,8 @@ namespace LesApp0.Lib
             result = data.Trim(' ');
 
             // перевірка відповідності шаблону
-            var res =  regex.IsMatch(result);
+            var res = regex.IsMatch(result);
             return res;
         }
-
     }
 }

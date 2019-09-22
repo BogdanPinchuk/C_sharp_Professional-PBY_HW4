@@ -6,12 +6,12 @@ using LesApp0.Tests.Stub;
 namespace LesApp0.Tests
 {
     [TestClass]
-    public class CheckLoginTest
+    public class CheckPasswordTest
     {
         /// <summary>
-        /// Екземпляр для логіна
+        /// Екземпляр для пароля
         /// </summary>
-        private static IRegistration login;
+        private static IRegistration password;
         /// <summary>
         /// Делегат для методу тестування вхідних даних логіна/пароля 
         /// </summary>
@@ -22,7 +22,7 @@ namespace LesApp0.Tests
         /// <summary>
         /// Зв'язування метода
         /// </summary>
-        private static CheckRegister delLogin_Test;
+        private static CheckRegister delPassword_Test;
 
         /// <summary>
         /// Запускається один раз перед запуском методів
@@ -31,37 +31,37 @@ namespace LesApp0.Tests
         public static void InitializeClass(TestContext _)
         {
             // arrange
-            login = new Login();
-            delLogin_Test = TestMethods.LogPass_Test;
+            password = new Password();
+            delPassword_Test = TestMethods.LogPass_Test;
         }
 
         [TestMethod]
-        public void Login_SuccessEntry_TrueReturn()
-            => delLogin_Test(StubObjects.LoginTrue, true, login);
+        public void Password_SuccessEntry_TrueReturn()
+            => delPassword_Test(StubObjects.PasswordTrue, true, password);
 
         [TestMethod]
-        public void Login_AddNumber_FalseReturn()
-            => delLogin_Test(StubObjects.LoginFalse0, false, login);
+        public void Password_AddNumber_FalseReturn()
+            => delPassword_Test(StubObjects.PasswordFalse0, true, password);
 
         [TestMethod]
-        public void Login_AddOtherLetter_FalseReturn()
-            => delLogin_Test(StubObjects.LoginFalse1, false, login);
+        public void Password_AddOtherLetter_FalseReturn()
+            => delPassword_Test(StubObjects.PasswordFalse1, false, password);
 
         [TestMethod]
-        public void Login_Empty_FalseReturn()
-            => delLogin_Test(StubObjects.LoginFalse2, false, login);
+        public void Password_Empty_FalseReturn()
+            => delPassword_Test(StubObjects.PasswordFalse2, false, password);
 
         [TestMethod]
-        public void Login_Space_FalseReturn()
-            => delLogin_Test(StubObjects.LoginFalse3, false, login);
+        public void Password_Space_FalseReturn()
+            => delPassword_Test(StubObjects.PasswordFalse3, false, password);
 
         [TestMethod]
-        public void Login_NullAble_FalseReturn()
-            => delLogin_Test(StubObjects.LoginFalse4, false, login);
+        public void Password_NullAble_FalseReturn()
+            => delPassword_Test(StubObjects.PasswordFalse4, false, password);
 
         [TestMethod]
-        public void Login_AddSign_FalseReturn()
-            => delLogin_Test(StubObjects.LoginFalse5, false, login);
+        public void Password_AddSign_FalseReturn()
+            => delPassword_Test(StubObjects.PasswordFalse5, false, password);
 
     }
 }
