@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using LesApp0.Lib;
+//using LesApp0.Lib;
 using LesApp0.Tests.Stub;
 
 namespace LesApp0.Tests
@@ -22,7 +22,7 @@ namespace LesApp0.Tests
         /// Запускається один раз перед запуском петодів
         /// </summary>
         [ClassInitialize]
-        public static void InitializeClass(TestContext context)
+        public static void InitializeClass(TestContext _)
         {
             // arrange
             login = new Login();
