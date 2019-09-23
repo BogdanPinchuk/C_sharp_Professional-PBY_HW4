@@ -15,7 +15,7 @@ namespace LesApp0
             Console.OutputEncoding = Encoding.Unicode;
 
             // запуск режстрації
-            new Register();
+            new Register().RegisterUser();
 
             // створено по слабкій ссилці, так як не передбачається
             // в умові додаткових дій, а якщо необхідно робити розширення
