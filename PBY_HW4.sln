@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LesApp0.Tests", "LesApp0.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LesApp1", "LesApp1\LesApp1.csproj", "{C891F17B-5769-498B-9974-60363F08EF65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LesApp2", "LesApp2\LesApp2.csproj", "{F56E0319-6BC7-4310-B0AF-FD97CC9C52F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C891F17B-5769-498B-9974-60363F08EF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C891F17B-5769-498B-9974-60363F08EF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C891F17B-5769-498B-9974-60363F08EF65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F56E0319-6BC7-4310-B0AF-FD97CC9C52F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F56E0319-6BC7-4310-B0AF-FD97CC9C52F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F56E0319-6BC7-4310-B0AF-FD97CC9C52F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F56E0319-6BC7-4310-B0AF-FD97CC9C52F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
