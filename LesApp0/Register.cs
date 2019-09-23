@@ -9,7 +9,7 @@ namespace LesApp0
     /// <summary>
     /// Реєстрація
     /// </summary>
-    class Register
+    class Register : IRegister
     {
         /// <summary>
         /// Делегат для введення логіна/пароля
@@ -23,10 +23,6 @@ namespace LesApp0
         /// <returns></returns>
         protected delegate ConsoleKeyInfo ReadKey(bool hide);
 
-        /// <summary>
-        /// Перевірка логіна/пароля
-        /// </summary>
-        private IRegistration logpass;
         /// <summary>
         /// Логін
         /// </summary>
@@ -51,16 +47,16 @@ namespace LesApp0
         /// <summary>
         /// Метод для введення логіна/пароля
         /// </summary>
-        protected ReadLine delReadline { get; set; } 
+        protected virtual ReadLine delReadline { get; set; } 
             = Console.ReadLine;
         /// <summary>
         /// Метод який керує повторним введенням логіна/пароля або виходом
         /// </summary>
-        protected ReadKey delReadKey { get; set; } 
+        protected virtual ReadKey delReadKey { get; set; } 
             = Console.ReadKey;
 
         /// <summary>
-        /// Конструктор для реєстрації
+        /// Реєстрація
         /// </summary>
         public void RegisterUser()
         {
@@ -69,7 +65,7 @@ namespace LesApp0
             Successful = false;
 
             // змінна, для керування ходом реєстрації + введення логіна
-            bool exit = AnalysisEnterData(new Login(), "Логін");
+            bool exit = AnalysisEnterData(new Login(), "Логін", out login);
 
             // перевірка чи коректно введено логін
             if (!exit)
@@ -79,7 +75,7 @@ namespace LesApp0
             }
 
             // введення пароля
-            exit = AnalysisEnterData(new Password(), "Пароль");
+            exit = AnalysisEnterData(new Password(), "Пароль", out password);
 
             // перевірка чи коректно введено пароль
             if (!exit)
@@ -93,10 +89,11 @@ namespace LesApp0
             Console.Clear();
             Successful = true;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n\tВітаємо з успішною реєстрацією: ");
-            Console.ResetColor();
+            Console.WriteLine("\n\tВітаємо з успішною реєстрацією:\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"\tLogin: {Login}");
             Console.WriteLine($"\tPassword: {Password}");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -105,7 +102,7 @@ namespace LesApp0
         /// <param name="logpass">Перевірка правильності введення логіна/пароля</param>
         /// <param name="part">Що перевіряється логін/пароль, вводити з великої букви</param>
         /// <returns></returns>
-        protected bool AnalysisEnterData(IRegistration logpass, string part)
+        protected bool AnalysisEnterData(IRegistration logpass, string part, out string returned)
         {
             while (true)
             {
@@ -114,13 +111,13 @@ namespace LesApp0
                 Console.ResetColor();
 
                 // аналіз введених даних
-                if (logpass.TryRegister(delReadline(), out login))
+                if (logpass.TryRegister(delReadline(), out returned))
                 {
                     return true;
                 }
 
                 // очищення
-                login = string.Empty;
+                returned = string.Empty;
 
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"\n\t{part} введено невірно. Повторити введення? [y, n]");

@@ -5,6 +5,9 @@ using LesApp0.Tests.Stub;
 
 namespace LesApp0.Tests
 {
+    /// <summary>
+    /// Перевірка реєстрації логіна
+    /// </summary>
     [TestClass]
     public class CheckLoginTest
     {

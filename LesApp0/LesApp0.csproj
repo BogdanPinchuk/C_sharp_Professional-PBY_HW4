@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRegister.cs" />
     <Compile Include="IRegistration.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Password.cs" />

@@ -87,5 +87,50 @@ namespace LesApp0.Tests.Stub
             => "Password#";
         #endregion
 
+        #region Data for AnalysisEnterData
+        #region Правильний ввід ЛП
+        /// <summary>
+        /// Правильний ввід ЛП
+        /// </summary>
+        public static Queue<string> Register_tLP
+           => new Queue<string>(new List<string>()
+           {
+               LoginTrue,
+               PasswordTrue
+           });
+        /// <summary>
+        /// Правильний ввід Keys
+        /// </summary>
+        public static Queue<ConsoleKeyInfo> Register_Key_tLP
+           => new Queue<ConsoleKeyInfo>(new List<ConsoleKeyInfo>()
+           {
+               new ConsoleKeyInfo((char)ConsoleKey.Y, ConsoleKey.Y, false, false, false),
+               new ConsoleKeyInfo((char)ConsoleKey.Y, ConsoleKey.Y, false, false, false),
+           });
+        #endregion
+
+        #region Неправильний ввід ЛП
+        /// <summary>
+        /// Неправильний ввід ЛП
+        /// </summary>
+        public static Queue<string> Register_fLP
+           => new Queue<string>(new List<string>()
+           {
+               LoginFalse5,
+               PasswordFalse5
+           });
+        /// <summary>
+        /// Неправильний ввід Keys
+        /// </summary>
+        public static Queue<ConsoleKeyInfo> Register_Key_fLP
+           => new Queue<ConsoleKeyInfo>(new List<ConsoleKeyInfo>()
+           {
+               new ConsoleKeyInfo((char)ConsoleKey.N, ConsoleKey.N, false, false, false),
+               new ConsoleKeyInfo((char)ConsoleKey.N, ConsoleKey.N, false, false, false),
+           });
+        #endregion
+
+        #endregion
+
     }
 }
