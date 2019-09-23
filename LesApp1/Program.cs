@@ -18,9 +18,24 @@ namespace LesApp1
             string address = "https://pbf.kpi.ua/ua/contacts/";
 
             // робимо пошук
-            Search.ParsingSite(address, Search.ObjectForSearch.Link);
-            Search.ParsingSite(address, Search.ObjectForSearch.Phone);
-            Search.ParsingSite(address, Search.ObjectForSearch.Email);
+            Thread[] threads = new Thread[]
+            {
+                new Thread(() => Search.ParsingSite(address, Search.ObjectForSearch.Link)),
+                new Thread(() => Search.ParsingSite(address, Search.ObjectForSearch.Phone)),
+                new Thread(() => Search.ParsingSite(address, Search.ObjectForSearch.Email))
+            };
+
+            // запускаємо
+            foreach (var thread in threads)
+            {
+                thread.Start();
+            }
+
+            // чекаємо
+            foreach (var thread in threads)
+            {
+                thread.Join();
+            }
 
             // відкриваємо результат
             Search.OpenResultFile();
