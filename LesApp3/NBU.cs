@@ -46,7 +46,7 @@ namespace LesApp3
         /// <summary>
         /// Оновлення курсу валют через НБУ
         /// </summary>
-        internal static void Update()
+        internal static void UpdateWeb()
         {
             try
             {
@@ -64,6 +64,27 @@ namespace LesApp3
             catch (WebException ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        internal static void UpdateFile()
+        {
+            try
+            {
+                // Відправка запиту
+                HttpWebRequest request = WebRequest.CreateHttp(address);
+
+                // Отримання відповіді, створення потоку, створення читача і записника
+                using (HttpWebResponse responce = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = responce.GetResponseStream())
+                {
+                    GetData(stream, Encoding.GetEncoding(responce.CharacterSet));
+                }
+
             }
             catch (Exception ex)
             {
