@@ -26,7 +26,7 @@ namespace LesApp2.Tests
         };
 
         [TestMethod]
-        public void SearchAdnChangeStringData_ReturnTrue()
+        public void SearchAdnChangeStringData_NotEqualReturn()
         {
             foreach (var sentence in stub)
             {

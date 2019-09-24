@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Примітка. В структуру заносяться дані в гривнях, лише на виведенні на чек
+// дані вітоматично конвертуватимуться у валюту згідно курсу НБУ
+
 namespace LesApp3
 {
     /// <summary>
@@ -12,6 +15,12 @@ namespace LesApp3
     /// </summary>
     struct Position
     {
+        public enum Currency
+        {
+            Hryvnia,
+            Other
+        }
+
         /// <summary>
         /// Культура
         /// </summary>
@@ -71,7 +80,11 @@ namespace LesApp3
                 return cost * Count;
             }
         }
-
+        /// <summary>
+        /// Тип валюти в залежнсоті від регіону
+        /// </summary>
+        public Currency Money { get; set; }
+  
         /// <summary>
         /// Податок (ПДВ - Value-added tax)
         /// </summary>
@@ -88,7 +101,8 @@ namespace LesApp3
             .Append((Volume == null) ? string.Empty : $"{Volume:N2} л ")
             .Append((Weigth == null) ? string.Empty : $"ваг {Weigth:N2} ")
             .Append($"{((Count < 2) ? 1 : Count)} шт. ")
-            .Append($"x {Price.ToString("C2", region)} = {Cost.ToString("C2", region)}")
+            .Append($"x {((Money == Currency.Hryvnia) ? Price : NBU.ConvertTo(Price)).ToString("C2", region)} = ")
+            .Append($"{((Money == Currency.Hryvnia) ? Cost : NBU.ConvertTo(Cost)).ToString("C2", region)}")
             .ToString();
 
     }

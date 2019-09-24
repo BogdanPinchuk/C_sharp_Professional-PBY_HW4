@@ -21,11 +21,11 @@ namespace LesApp3.Tests
         }
 
         [TestMethod]
-        public void NBUTest_ENRate_TrueReturned()
+        public void NBUTest_ENRate_EqualReturned()
             => NBUTestMethod(StubObjects.ENRates);
 
         [TestMethod]
-        public void NBUTest_UARate_TrueReturned()
+        public void NBUTest_UARate_EqualReturned()
             => NBUTestMethod(StubObjects.UARates);
 
         /// <summary>
