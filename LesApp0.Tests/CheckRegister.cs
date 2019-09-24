@@ -1,12 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using LesApp0.Tests.Stub;
-using Moq;
 
 namespace LesApp0.Tests
 {
@@ -37,7 +33,7 @@ namespace LesApp0.Tests
             };
 
             // act
-            string returned = string.Empty;
+            string returned;
             bool actual = register.AnalysisEnterDataTest(new Login(), login, out returned);
 
             // assert
@@ -64,7 +60,7 @@ namespace LesApp0.Tests
             };
 
             // act
-            string returned = string.Empty;
+            string returned;
             bool actual = register.AnalysisEnterDataTest(new Password(), password, out returned);
 
             // assert
@@ -86,7 +82,7 @@ namespace LesApp0.Tests
             };
 
             // act
-            string returned = string.Empty;
+            string returned;
             bool actual = register.AnalysisEnterDataTest(new Login(), login, out returned);
 
             // assert
@@ -114,7 +110,7 @@ namespace LesApp0.Tests
             };
 
             // act
-            string returned = string.Empty;
+            string returned;
             bool actual = register.AnalysisEnterDataTest(new Password(), password, out returned);
 
             // assert
@@ -128,6 +124,12 @@ namespace LesApp0.Tests
         [TestMethod]
         public void Register_EntryTLP()
         {
+            // Примітка. Спеціально залишено для аналізу.
+            // Видає помилку лише в режимі запуску теста, 
+            // якщо ж запускати в режимі отладки - помилок немає
+            // це пов'язано із викликом Console яка в режимі тестування відсутня
+            // проблема вирішена і описана в прикладі LesApp3
+
             // arrange
             register = new RegisterTest()
             {
@@ -152,12 +154,12 @@ namespace LesApp0.Tests
         /// <summary>
         /// Метод для введення логіна/пароля
         /// </summary>
-        protected override ReadLine delReadline { get; set; }
+        protected override ReadLine DelReadline { get; set; }
             = ReadLineM;
         /// <summary>
         /// Метод який керує повторним введенням логіна/пароля або виходом
         /// </summary>
-        protected override ReadKey delReadKey { get; set; }
+        protected override ReadKey DelReadKey { get; set; }
             = ReadKeyM;
 
         /// <summary>

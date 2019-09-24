@@ -58,6 +58,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\StubObjects.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LesApp3\LesApp3.csproj">

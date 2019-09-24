@@ -23,7 +23,7 @@ namespace LesApp2
         /// <summary>
         /// Назва файлу для збереження даних
         /// </summary>
-        private static string filename = "LesApp2.txt";
+        private static readonly string filename = "LesApp2.txt";
         /// <summary>
         /// Для синхтонізації доступу до файлу
         /// </summary>
@@ -36,7 +36,7 @@ namespace LesApp2
         /// <summary>
         /// Шаблони RegEx для пошуку
         /// </summary>
-        private static List<string> words = new List<string>()
+        private static readonly List<string> words = new List<string>()
         {
             #region patterns
             "в ім’я",

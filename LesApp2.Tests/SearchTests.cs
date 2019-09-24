@@ -10,7 +10,7 @@ namespace LesApp2.Tests
     [TestClass]
     public class SearchTests
     {
-        List<string> stub = new List<string>()
+        private readonly List<string> stub = new List<string>()
         {
             "до магазину, їхати до додому, їхати до",
             "їхати до магазину, іти по дорозі, лежати на столі, кинути під лаву",
@@ -28,13 +28,11 @@ namespace LesApp2.Tests
         [TestMethod]
         public void SearchAdnChangeStringData_ReturnTrue()
         {
-            string temp = string.Empty;
-
             foreach (var sentence in stub)
             {
                 if (Search.IsPreposition(sentence))
                 {
-                    temp = sentence;
+                    string temp = sentence;
                     Debug.WriteLine(temp);
                     Search.ReplacePreposition(ref temp);
                     Debug.WriteLine(temp);

@@ -18,7 +18,7 @@ namespace LesApp0.Tests
         internal static void LogPass_Test(string stub, bool wait, IRegistration logpass)
         {
             // вихідний результат
-            string result = string.Empty;
+            string result;
 
             // act
             bool actual = logpass.TryRegister(stub, out result);

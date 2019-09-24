@@ -13,13 +13,13 @@ namespace LesApp2
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // join unicode
             Console.OutputEncoding = Encoding.Unicode;
 
             // Задаємо адресу (де є якість приклади)
-            string address0 = "https://uk.wikipedia.org/wiki/Прийменник",
+            string //address0 = "https://uk.wikipedia.org/wiki/Прийменник",
                 address1 = "https://zno.if.ua/?p=2716";
 
             // видаляємо файл

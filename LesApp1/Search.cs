@@ -52,12 +52,12 @@ namespace LesApp1
         /// <summary>
         /// Назва файлу для збереження даних
         /// </summary>
-        private static string filename = "LesApp1.Data.txt";
+        private static readonly string filename = "LesApp1.Data.txt";
 
         /// <summary>
         /// Шаблони RegEx для пошуку
         /// </summary>
-        private static List<string> patterns = new List<string>()
+        private static readonly List<string> patterns = new List<string>()
         {
             @"(\b\w+:\/\/\w+((\.\w)*\w+)*\.\w{2,3}(\/\w*|\.\w*|\?\w*\=\w*)*)",  // сайт
             @"\+? ?3?[ -]?8?[ -]?\(?(\d[ -]?){3}\)?[ -]?(\d[ -]?){7}",  // телефон

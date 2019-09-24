@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,7 +15,24 @@ namespace LesApp3
     /// </summary>
     static class NBU
     {
-
+        /// <summary>
+        /// Делегат для виведення інформації
+        /// </summary>
+        /// <param name="value">текстова інформація</param>
+        internal delegate void DelWriteLine(string value);
+        // Примітка. Коли запускати на виконання код із тестування, де не моде запускатись консольне  вікно
+        // виводитиметься наступна помилка: (Приклад спеціально оставлений Register_EntryTLP)
+        // Сообщение: 
+        // Test method LesApp0.Tests.CheckRegister.Register_EntryTLP threw exception: 
+        // System.IO.IOException: The handle is invalid.
+        // Трассировка стека: 
+        // в __Error.WinIOError(Int32 errorCode, String maybeFullPath)
+        // в Console.GetBufferInfo(Boolean throwOnNoConsole, Boolean& succeeded)
+        // в Console.Clear()
+        // Щоб цього не було, просто можна скористатися делегатами подібно до інтерфейсів
+        // і підміняти фінкції ввиведення в залежності від середовища виконання
+        // наприклад для тестів подібний виклик Console.WriteLine() - Debug.WriteLine()
+        // Якщо запускати в режимі виконання тесту - помилка, якщо в режимі отладки - все нормально
 
         /// <summary>
         /// Офіційна адреса сайта НБУ
@@ -44,9 +62,15 @@ namespace LesApp3
             = "USD";
 
         /// <summary>
+        /// Виведення переданого рядка
+        /// </summary>
+        internal static DelWriteLine WriteLine { get; set; }
+            = Console.WriteLine;
+
+        /// <summary>
         /// Оновлення курсу валют через НБУ
         /// </summary>
-        internal static void UpdateWeb()
+        internal static void Update()
         {
             try
             {
@@ -63,32 +87,11 @@ namespace LesApp3
             }
             catch (WebException ex)
             {
-                Console.WriteLine(ex.Message);
+                WriteLine(ex.Message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        internal static void UpdateFile()
-        {
-            try
-            {
-                // Відправка запиту
-                HttpWebRequest request = WebRequest.CreateHttp(address);
-
-                // Отримання відповіді, створення потоку, створення читача і записника
-                using (HttpWebResponse responce = (HttpWebResponse)request.GetResponse())
-                using (Stream stream = responce.GetResponseStream())
-                {
-                    GetData(stream, Encoding.GetEncoding(responce.CharacterSet));
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                WriteLine(ex.Message);
             }
         }
 
@@ -142,7 +145,7 @@ namespace LesApp3
 
                             // виведення сповіщення
                             Date = DateTime.Now;
-                            Console.WriteLine($"\nКурс валют оновлено.");
+                            WriteLine($"\nКурс валют оновлено.");
                         }
 
                     } while (line != null);
@@ -150,7 +153,7 @@ namespace LesApp3
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                WriteLine(ex.Message);
             }
         }
 

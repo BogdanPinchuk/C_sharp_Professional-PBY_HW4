@@ -47,12 +47,12 @@ namespace LesApp0
         /// <summary>
         /// Метод для введення логіна/пароля
         /// </summary>
-        protected virtual ReadLine delReadline { get; set; } 
+        protected virtual ReadLine DelReadline { get; set; } 
             = Console.ReadLine;
         /// <summary>
         /// Метод який керує повторним введенням логіна/пароля або виходом
         /// </summary>
-        protected virtual ReadKey delReadKey { get; set; } 
+        protected virtual ReadKey DelReadKey { get; set; } 
             = Console.ReadKey;
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace LesApp0
                 Console.ResetColor();
 
                 // аналіз введених даних
-                if (logpass.TryRegister(delReadline(), out returned))
+                if (logpass.TryRegister(DelReadline(), out returned))
                 {
                     return true;
                 }
@@ -123,7 +123,7 @@ namespace LesApp0
                 Console.Write($"\n\t{part} введено невірно. Повторити введення? [y, n]");
                 Console.ResetColor();
 
-                var key = delReadKey(true).Key;
+                var key = DelReadKey(true).Key;
 
                 if (key == ConsoleKey.Y)
                 {
