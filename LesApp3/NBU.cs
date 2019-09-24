@@ -112,15 +112,31 @@ namespace LesApp3
         }
 
         /// <summary>
+        /// Конвертація із гривень в іноземну валюту
+        /// </summary>
+        /// <param name="currency">Гроші</param>
+        /// <returns></returns>
+        public static double ConvertTo(double currency)
+            => currency * Unit / Rate;
+
+        /// <summary>
+        /// Конвертація із іноземної валюти в гривні
+        /// </summary>
+        /// <param name="currency">Гроші</param>
+        /// <returns></returns>
+        public static double ConvertFrom(double currency)
+            => currency * Rate / Unit;
+
+        /// <summary>
         /// Вивід інформації про курс валют
         /// </summary>
         /// <returns></returns>
         public static new string ToString()
-            => new StringBuilder("\n\tNational Bank of Ukraine")
-            .Append($"\nDate: " + Date.ToShortDateString())
-            .Append($"\nCode alpha: {Code}")
-            .Append($"\nUnit: {Unit:N0}")
-            .Append($"\nRate: {Rate:N4}")
+            => new StringBuilder("\nNational Bank of Ukraine\n")
+            .Append($"\n\tDate: " + Date.ToShortDateString())
+            .Append($"\n\tCode alpha: {Code}")
+            .Append($"\n\tUnit: {Unit:N0}")
+            .Append($"\n\tRate: {Rate:N4}")
             .ToString();
 
     }
