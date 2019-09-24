@@ -73,6 +73,12 @@ namespace LesApp3
         }
 
         /// <summary>
+        /// Податок (ПДВ - Value-added tax)
+        /// </summary>
+        public double VAT
+            => 0.2 * Cost;
+
+        /// <summary>
         /// Виведення інформації в кодованому вигляді
         /// </summary>
         /// <returns></returns>
