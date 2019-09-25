@@ -19,8 +19,6 @@ namespace LesApp3
             // join unicode
             Console.OutputEncoding = Encoding.Unicode;
 
-            
-
             // delay
             Console.ReadKey(true);
         }

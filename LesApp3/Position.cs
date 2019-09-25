@@ -11,16 +11,25 @@ using System.Threading.Tasks;
 namespace LesApp3
 {
     /// <summary>
+    /// Тип валюти
+    /// </summary>
+    public enum Currency
+    {
+        /// <summary>
+        /// Гривні
+        /// </summary>
+        Hryvnia,
+        /// <summary>
+        /// Іноземна валюта
+        /// </summary>
+        Other
+    }
+
+    /// <summary>
     /// Товар замовлення
     /// </summary>
     struct Position
     {
-        public enum Currency
-        {
-            Hryvnia,
-            Other
-        }
-
         /// <summary>
         /// Культура
         /// </summary>
@@ -69,15 +78,16 @@ namespace LesApp3
                 // і на коритувачу лишається відповідальність за ввід ваги або об'єму
                 if (Volume != null)
                 {
-                    cost = (double)Volume * Price;
+                    cost = (double)Volume;
                 }
 
                 if (Weigth != null)
                 {
-                    cost = (double)Weigth * Price;
+                    cost = (double)Weigth;
                 }
 
-                return cost * Count;
+                cost = (cost == 0 ? 1 : cost) * Count * Price;
+                return (Money == Currency.Hryvnia) ? cost : NBU.ConvertTo(cost);
             }
         }
         /// <summary>
@@ -102,7 +112,7 @@ namespace LesApp3
             .Append((Weigth == null) ? string.Empty : $"ваг {Weigth:N2} ")
             .Append($"{((Count < 2) ? 1 : Count)} шт. ")
             .Append($"x {((Money == Currency.Hryvnia) ? Price : NBU.ConvertTo(Price)).ToString("C2", region)} = ")
-            .Append($"{((Money == Currency.Hryvnia) ? Cost : NBU.ConvertTo(Cost)).ToString("C2", region)}")
+            .Append($"{Cost.ToString("C2", region)}")
             .ToString();
 
     }

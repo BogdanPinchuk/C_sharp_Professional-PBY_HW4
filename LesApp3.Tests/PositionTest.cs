@@ -62,8 +62,8 @@ namespace LesApp3.Tests
         public void Position_WaterData_UA_Equal()
         {
             // arrange
-            product.Count = 1;
             product.Name = "IFresh";
+            product.Count = 1;
             product.Price = 7.99;
             product.Volume = 0.5;
 
@@ -78,8 +78,8 @@ namespace LesApp3.Tests
         public void Position_PizzaData_UA_Equal()
         {
             // arrange
-            product.Count = 1;
             product.Name = "Miami";
+            product.Count = 1;
             product.Price = 199.00;
             product.Weigth = 0.114;
 
@@ -101,7 +101,7 @@ namespace LesApp3.Tests
             product.Price = 7.99;
             product.Volume = 0.5;
             product.Region = "en-US";
-            product.Money = Position.Currency.Other;
+            product.Money = Currency.Other;
 
             // act + assert
             Assert.AreEqual(StubObjects.WaterENCur, product.ToString());
@@ -119,7 +119,7 @@ namespace LesApp3.Tests
             product.Price = 199.00;
             product.Weigth = 0.114;
             product.Region = "en-US";
-            product.Money = Position.Currency.Other;
+            product.Money = Currency.Other;
 
             // act + assert
             Assert.AreEqual(StubObjects.PizzaENCur, product.ToString());
