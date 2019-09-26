@@ -41,13 +41,13 @@ namespace LesApp3.Tests.Resources
         /// Бутилка солодкої води
         /// </summary>
         public static string WaterEN
-            => "# IFresh 0,50 л 1 шт. x $7.99 = $4.00";
+            => "# IFresh 0,500 л 1 шт. x $7.99 = $4.00";
 
         /// <summary>
         /// Піцца
         /// </summary>
         public static string PizzaEN
-            => "# Miami ваг 0,11 1 шт. x $199.00 = $22.69";
+            => "# Miami ваг 0,114 1 шт. x $199.00 = $22.69";
 
         /// <summary>
         /// Бутилка солодкої води
@@ -58,7 +58,7 @@ namespace LesApp3.Tests.Resources
         /// Бутилка солодкої води (без пробіла)
         /// </summary>
         public static string WaterUA
-            => "# IFresh 0,50 л 1 шт. x 7,99₴ = 4,00₴";
+            => "# IFresh 0,500 л 1 шт. x 7,99 ₴ = 4,00 ₴";
 
         /// <summary>
         /// Піцца
@@ -69,19 +69,19 @@ namespace LesApp3.Tests.Resources
         /// Піцца (без пробіла)
         /// </summary>
         public static string PizzaUA
-            => "# Miami ваг 0,11 1 шт. x 199,00₴ = 22,69₴";
+            => "# Miami ваг 0,114 1 шт. x 199,00 ₴ = 22,69 ₴";
 
         /// <summary>
         /// Бутилка солодкої води
         /// </summary>
         public static string WaterENCur
-            => "# IFresh 0,50 л 1 шт. x $0.33 = $0.16";
+            => "# IFresh 0,500 л 1 шт. x $0.33 = $0.16";
 
         /// <summary>
         /// Піцца
         /// </summary>
         public static string PizzaENCur
-            => "# Miami ваг 0,11 1 шт. x $8.18 = $0.93";
+            => "# Miami ваг 0,114 1 шт. x $8.18 = $0.93";
         
 
         #endregion
