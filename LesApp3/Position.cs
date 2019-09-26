@@ -107,9 +107,9 @@ namespace LesApp3
         /// <returns></returns>
         public override string ToString()
             => new StringBuilder("# ")
-            .Append($"{Name} ")
-            .Append((Volume == null) ? string.Empty : $"{Volume:N2} л ")
-            .Append((Weigth == null) ? string.Empty : $"ваг {Weigth:N2} ")
+            .Append($"{((Name == string.Empty || Name == null) ? "None" : Name)} ")
+            .Append((Volume == null) ? string.Empty : $"{Volume:N3} л ")
+            .Append((Weigth == null) ? string.Empty : $"ваг {Weigth:N3} ")
             .Append($"{((Count < 2) ? 1 : Count)} шт. ")
             .Append($"x {((Money == Currency.Hryvnia) ? Price : NBU.ConvertTo(Price)).ToString("C2", region)} = ")
             .Append($"{Cost.ToString("C2", region)}")

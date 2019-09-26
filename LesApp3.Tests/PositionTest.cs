@@ -69,6 +69,7 @@ namespace LesApp3.Tests
 
             // act + assert
             Assert.AreEqual(StubObjects.WaterUA, product.ToString());
+            //Assert.AreEqual(StubObjects.WaterUA_space, product.ToString());   // для версій вище 2015 і win 7
 
             // Вивід
             Debug.WriteLine(product.ToString());
@@ -85,6 +86,7 @@ namespace LesApp3.Tests
 
             // act + assert
             Assert.AreEqual(StubObjects.PizzaUA, product.ToString());
+            //Assert.AreEqual(StubObjects.PizzaUA_space, product.ToString());   // для версій вище 2015 і win 7
 
             // Вивід
             Debug.WriteLine(product.ToString());

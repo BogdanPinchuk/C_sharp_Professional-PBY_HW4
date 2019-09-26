@@ -75,6 +75,9 @@ namespace LesApp3
         /// </summary>
         public Currency Money { get; set; }
 
+        /// <summary>
+        /// Сформувати чек за замовчуванням
+        /// </summary>
         public Check()
         {
             Products = new List<Position>();
@@ -82,13 +85,20 @@ namespace LesApp3
             CompanyName = "Pinchuk";
             Address = "c. Kyiv";
             AddInfo = "My home work";
-            Cashier = rnd.Next(0, int.MaxValue);
+            Cashier = rnd.Next(0, short.MaxValue);
             Receipt = rnd.Next(0, int.MaxValue).ToString();
             Money = Currency.Hryvnia;
         }
 
+        /// <summary>
+        /// Сформувати чек із текстового файла (вказувати без розширення файла .txt)
+        /// </summary>
+        /// <param name="path"></param>
         public Check(string path)
-            => RecognitionCheckFile(path);
+        {
+            Products = new List<Position>();
+            RecognitionCheckFile(path);
+        }
 
         /// <summary>
         /// Збереження чека в файл
@@ -124,14 +134,16 @@ namespace LesApp3
 
             try
             {
-                using (Stream stream = new FileStream(path + ".txt", FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+                using (Stream stream = new FileStream(path + ".txt", FileMode.Open, FileAccess.ReadWrite, FileShare.None))
                 using (StreamReader reader = new StreamReader(stream, Encoding.Unicode))
                 {
                     // змінна даних для розпізнавання
                     string data;
 
-                    // припускаємо, що користувач не залазив у файл і не міняв структури
+                    // очищення списку
+                    Products.Clear();
 
+                    // припускаємо, що користувач не залазив у файл і не міняв структури
                     #region Шапка
                     // розпізнавання файла
                     data = reader.ReadLine();
@@ -153,18 +165,19 @@ namespace LesApp3
                     #region Продукти
                     Position product;
                     data = reader.ReadLine();
-                    while (!Regex.IsMatch(data, @"-+"))
+                    while (!Regex.IsMatch(data, @"^-+"))
                     {
                         product = new Position();
                         string line;
 
-                        // Назва продукта (якщо є лише вага)
-                        if (Regex.IsMatch(data, @"# \w ваг"))
+                        #region Назва продукта (якщо є лише вага)
+                        if (Regex.IsMatch(data, @"# [ \w]+ ваг"))
                         {
-                            line = Regex.Match(data, @"# \w ваг").Value;
-                            line = line.Replace("ваг", string.Empty).Trim(' ');
+                            line = Regex.Match(data, @"# [ \w]+ ваг").Value;
+                            line = line.Replace("ваг", string.Empty)
+                                .TrimStart('#').Trim(' ');
                             product.Name = line;
-                            data = data.Replace(line, string.Empty).TrimStart(' ');
+                            data = data.Replace(line, string.Empty).TrimStart('#').TrimStart(' ');
 
                             // знаходимо вагу
                             if (Regex.IsMatch(data, @"ваг \d+[.,]\d+ "))
@@ -175,14 +188,16 @@ namespace LesApp3
                                 product.Weigth = double.Parse(line.Replace(".", ",").Trim(' '));
                             }
                         }
+                        #endregion
 
-                        // Назва продукта (якщо є лише об'єм)
-                        if (Regex.IsMatch(data, @"# \w \d+[.,]\d+"))
+                        #region Назва продукта (якщо є лише об'єм)
+                        if (Regex.IsMatch(data, @"# [ \w]+ \d+[.,]\d+"))
                         {
-                            line = Regex.Match(data, @"# \w \d+[.,]\d+").Value;
-                            line = Regex.Replace(line, @"\d+[.,]\d+", string.Empty).TrimEnd(' ');
+                            line = Regex.Match(data, @"# [ \w]+ \d+[.,]\d+").Value;
+                            line = Regex.Replace(line, @"\d+[.,]\d+", string.Empty)
+                                .TrimStart('#').Trim(' ');
                             product.Name = line;
-                            data = data.Replace(line, string.Empty).TrimStart(' ');
+                            data = data.Replace(line, string.Empty).TrimStart('#').TrimStart(' ');
 
                             // знаходимо об'єм
                             if (Regex.IsMatch(data, @"\d+[.,]\d+ л"))
@@ -193,12 +208,55 @@ namespace LesApp3
                                 product.Volume = double.Parse(line.Replace(".", ",").Trim(' '));
                             }
                         }
+                        #endregion
 
-                        // Назва продукта (якщо немає ні ваги ні об'єму)
-                        if (Regex.IsMatch(data, @"# \w \d"))
+                        #region Назва продукта (якщо немає ні ваги ні об'єму)
+                        if (Regex.IsMatch(data, @"# [ \w]+ \d+ шт."))
                         {
-
+                            line = Regex.Match(data, @"# [ \w]+ \d+ шт.").Value;
+                            line = Regex.Replace(line, @"\d+ шт.", string.Empty)
+                                .TrimStart('#').Trim(' ');
+                            product.Name = line;
+                            data = data.Replace(line, string.Empty).TrimStart('#').TrimStart(' ');
                         }
+                        #endregion
+
+                        #region Кількість товару "штук"
+                        if (Regex.IsMatch(data, @"\d+ шт."))
+                        {
+                            line = Regex.Match(data, @"\d+ шт.").Value;
+                            data = data.Replace(line, string.Empty).TrimStart(' ');
+                            line = line.Replace("шт.", string.Empty).Trim(' ');
+                            product.Count = int.Parse(line);
+                        }
+                        #endregion
+
+                        #region Ціна продукту
+                        if (Regex.IsMatch(data, @"x[ \W]+\d+[.,]\d+[ \W]+="))
+                        {
+                            line = Regex.Match(data, @"x[ \W]+\d+[.,]\d+[ \W]+=").Value;
+                            #region Валюта
+                            // http://qaru.site/questions/8953198/regex-to-separate-different-currencies-and-numeric-value
+                            // Примітка. На той випадок якщо необхідно буде розширити програму,
+                            // але згідно умови сказано, що чек на українській мові, точніше в гривневому еквіваленті
+#if false
+                            {
+                                string pat = @"((?<CurrencySymbol>(?<=\s)[^\d\-+\.,]{1,3}) *(?<CurrencyValue>[0-9\.,]+))|((?<CurrencyValue>[0-9\.,]+) *(?<CurrencyCode>[A-Z]{3}))";
+                                string valute = Regex.Match(line, pat).Groups["CurrencySymbol"].Value;
+                            } 
+#endif
+                            // додатковий патерн @"(\P{Sc})+"
+                            // https://docs.microsoft.com/ru-ru/dotnet/standard/base-types/character-classes-in-regular-expressions
+                            #endregion
+                            data = data.Replace(line, string.Empty).TrimStart(' ');
+                            line = Regex.Match(line, @"\d+[.,]\d+").Value;
+                            product.Price = double.Parse(line.Replace(".", ",").Trim(' '));
+                        }
+                        #endregion
+
+                        // занесення продукту в список
+                        Products.Add(product);
+                        data = reader.ReadLine();
                     }
                     #endregion
                 }
@@ -225,8 +283,8 @@ namespace LesApp3
             // тимчасова змінна для втсановлення параметрів відобаження
             Position temp;
             // загальна сума і ПДВ
-            double sum = default,
-                vat = default;
+            double sum = default(double),
+                vat = default(double);
 
             foreach (var product in Products)
             {

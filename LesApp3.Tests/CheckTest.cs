@@ -101,6 +101,40 @@ namespace LesApp3.Tests
             Process.Start(path + ".txt");
         }
 
+        [TestMethod]
+        public void RecognizationCheck_UA()
+        {
+            // arrange
+            check.Products.Add(new Position()
+            {
+                Name = "IFresh",
+                Count = 1,
+                Price = 7.99,
+                Volume = 0.5,
+            });
+            check.Products.Add(new Position()
+            {
+                Name = "Meat",
+                Count = 1,
+                Price = 225.00,
+                Weigth = 0.575,
+            });
+            check.Products.Add(new Position()
+            {
+                Name = "Bread white",
+                Count = 1,
+                Price = 15.00,
+            });
+
+            // act
+            check.SaveCheckFile(path);
+
+            Check newCheck = new Check(path);
+
+            // present
+            Debug.WriteLine(newCheck.ToString());
+        }
+
 
     }
 }
